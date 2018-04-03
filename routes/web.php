@@ -12,15 +12,25 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+	return view('welcome');
 });
 
 Route::get('/page', function () {
-    return view('page');
+	return view('page');
 });
 
-Route::get('/e', function () {
-    return view('e');
+
+Route::get('/gallery', function () {
+	return view('gallery');
+});
+
+Route::get('/countries', function () {
+	return view('Countries\countries');
+});
+
+Route::get('/yachts', function () {
+	//$country=DB::table('Countries')->get();
+	return view('yachts');
 });
 //Route::get('page', 'IndexController@index');
 
