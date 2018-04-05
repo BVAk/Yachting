@@ -39,10 +39,10 @@
         height: 480px;
     }
     #thumbnail-preview-indicators .slides .slide-1 {
-        background-image: url(http://bootstraptema.ru/snippets/slider/2017/thumbslider/thumbslider-1.jpg); 
+        background-image: url('{{asset('photo/croatia.png')}}'); 
     }
     #thumbnail-preview-indicators .slides .slide-2 {
-        background-image: url(http://bootstraptema.ru/snippets/slider/2017/thumbslider/thumbslider-2.jpg);
+        background-image: url({{asset('photo/france.png')}});
     }
     #thumbnail-preview-indicators .slides .slide-3 {
         background-image: url(http://bootstraptema.ru/snippets/slider/2017/thumbslider/thumbslider-3.jpg);
@@ -230,19 +230,9 @@ background-image: url({{asset('image/night1.jpg')}});
     </div>
 </div>
 </div>
-<h1>Маршруты:</h1>
-@foreach ($countries_photo as $key => $data)
-<img class="img-responsive" width="400px" src="{{$data->Countries_photo_photo}}"> 
-<img src="{{URL::to('/photo')}}{{ $data->Countries_photo_photo}}" alt="{{ $data->Countries_photo_photo }}" />
-
-
-
-@endforeach
 
 
 </div>
-@endsection
-
 
 
 
@@ -257,7 +247,7 @@ background-image: url({{asset('image/night1.jpg')}});
         </li>
         <li data-target="#thumbnail-preview-indicators" data-slide-to="1">
             <div class="thumbnail">
-                <img class="img-responsive" src="http://bootstraptema.ru/snippets/slider/2017/thumbslider/thumbslider-2.jpg">
+                <img class="img-responsive" src="{{asset('photo/france.png')}}">
             </div>
         </li>
         <li data-target="#thumbnail-preview-indicators" data-slide-to="2">
@@ -271,9 +261,9 @@ background-image: url({{asset('image/night1.jpg')}});
             <div class="slide-1"></div>
             <div class="container">
                 <div class="carousel-caption">
-                    <h1>Thumb indicator carousel</h1>
-                    <p>Responsive thumbnail preview in carousel indicators</p>
-                    <p class="lead"><a class="btn btn-lg btn-link" href="#" role="button">THUMBSLIDER</a></p>
+                    <h1>Хорватия</h1>
+                    <p>Кратко о Хорватии</p>
+                    <p class="lead"><a class="btn btn-lg btn-link" href="yachts" role="button">Просмотр яхт в Хорватии</a></p>
                 </div>
             </div>
         </div>
@@ -281,9 +271,9 @@ background-image: url({{asset('image/night1.jpg')}});
             <div class="slide-2"></div>
             <div class="container">
                 <div class="carousel-caption">
-                    <h1>Another example headline one</h1>
-                    <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam</p>
-                    <p><a class="btn btn-lg btn-link" href="#" role="button">THUMBSLIDER</a></p>
+                    <h1>Франция</h1>
+                    <p>Кратко о Франции</p>
+                    <p><a class="btn btn-lg btn-link" href="#" role="button">Просмотр яхт во Франции</a></p>
                 </div>
             </div>
         </div>
@@ -303,4 +293,7 @@ background-image: url({{asset('image/night1.jpg')}});
 </div>
 
 </body>
+
+@endsection
+
 </html>
