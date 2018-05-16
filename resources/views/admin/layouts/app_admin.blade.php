@@ -9,9 +9,11 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>{{ config('app.name', 'Yachting') }}</title>
-
+    <script src="{{ asset('js/vue.js') }}"></script>
+    <script src="{{ asset('js/vue-resource.js') }}"></script>
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    
 </head>
 <body>
     <div id="app">
@@ -37,11 +39,11 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="nav navbar-nav">
                        <li class="dropdown">
-                           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expaanded="false">Blog</a>
+                           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expaanded="false">Добавить</a>
                            <ul class="dropdown-menu" role="menu">
 
-                           <li><a href ="{{ route('admin.category.index')}}">Категории</a></li>
-                            <li><a href ="#">Материалы</a></li></ul>
+                           <li><a href ="/addyacht">Яхту</a></li>
+                            <li><a href ="#">Шкипера</a></li></ul>
                        </li>
                     </ul>
 
