@@ -3,7 +3,13 @@
 $yacht=DB::table('yachts')->join('marinas','Yacht_marina','=','marinas.marinas_id')->join ('countries','marinas.Countries_Countries_id','=','countries.countries_id')->join('Yachts_photo','Yachts.Yachts_id','=','Yachts_photo.Yachts_id')->where('Yachts.Yachts_id', $yachts_id)->paginate(15);
 ?>
 <title>Yachting</title>
+<!-- Bootstrap CSS -->
+<link href="bootstrap\css/bootstrap.min.css" rel="stylesheet">
+<!-- fancyBox3 CSS -->
+<link href="\fancybox-master\dist/jquery.fancybox.min.css" rel="stylesheet">
 
+<!-- fancyBox JS -->
+<script src="\fancybox-master\dist/jquery.fancybox.min.js"></script>
 <style>
 .btton {
 	display: inline-block;
@@ -31,87 +37,148 @@ $yacht=DB::table('yachts')->join('marinas','Yacht_marina','=','marinas.marinas_i
 
 }
 
+.thumb img {
+	-webkit-filter: grayscale(0);
+	filter: none;
+	border-radius: 5px;
+	background-color: #fff;
+	border: 1px solid #ddd;
+	padding: 5px;
+}
 
+.thumb img:hover {
+	-webkit-filter: grayscale(1);
+	filter: grayscale(1);
+}
+
+.thumb {
+	padding: 5px;
+}
 </style>
 
 <body>
-	<div class="container">
+	<div class="container" id="dka" @load="tutorialDemo">
 		<div class="row">
 			<div class="col-md-8 col-md-offset-2">
 				<div class="panel panel-default">
 
+					@if (Route::has('login'))
+					<div class="top-right links">
+						@auth
+						
 
-					<div><h1> @foreach($yacht as $countryname)
-						{{$countryname->Countries_name}}
+						<div><h1> @foreach($yacht as $countryname)
+							{{$countryname->Countries_name}}
+						</h1></div>
+
+						<div class="links" >
+							<a href="{{url($countryname->Marinas_name)}}" style="padding:20px">{{$countryname->Marinas_name}}</a>
+						</div>
 						@break
 
-					@endforeach </h1></div>
-
-					<div class="links" >
-						@foreach ($yacht as $onemarina)
-						<a href="{{url($onemarina->Marinas_name)}}" style="padding:20px">{{$onemarina->Marinas_name}}</a>
-
 						@endforeach
-					</div>
-					<div class="panel-body">
-						<table class="table">
-							<thead>
-								@foreach ($yacht as $oneyacht)
-								<h1 align="center">{{$oneyacht->Yacht_name}} </h1></thead>
+						<div class="panel-body">
+							<table class="table">
+								<thead>
+									@foreach ($yacht as $oneyacht)
+									<h1 align="center">{{$oneyacht->Yacht_name}} </h1>
+									<div thumb><img class="img-fluid" width ="100%" src="{{asset($oneyacht->Yacht_main_photo)}}" ></div>
+								@BREAK @endforeach</thead>
 								<tr><td>
-									<img width="600px" align="right" src="{{asset($oneyacht->Yachts_photo_url)}}"> </td> </tr>
-									<tr>
-										<td>
-											{!!$oneyacht->Yacht_about!!} <br>
-										</td>
+
+									
+
+									<div>
+
+										@foreach ($yacht as $oneyacht)
+
+										<div class=" col-lg-2 col-md-2 col-3 thumb" >
+											<a data-fancybox="gallery" href="{{asset($oneyacht->Yachts_photo_url)}}">
+												<img class="img-fluid" height ="150px" src="{{asset($oneyacht->Yachts_photo_url)}}" >
+											</a>
+										</div>
 
 
-									</tr>
+										@endforeach
 
-									@endforeach
-								</table>
-								<br>
-								<a href="{{url('/booking/'.$oneyacht->Yachts_id)}}"> <button padding="100px" class="btton">Заказать </button> </a>
-							</div>
+										
+									</div>
+
+									
+								</td>
+							</tr>
+							@foreach ($yacht as $oneyacht)
+							
+							<tr>
+								<td align="justify" >
+									{!!$oneyacht->Yacht_about!!} <br>
+									{{$oneyacht->Yacht_price}}€/за неделю
+								</td></tr><tr>
+									<td> <img src="{{asset($oneyacht->Yacht_structure)}}"></td>
+
+
+								</tr>
+								@break
+
+								@endforeach
+							</table>
+							<br>
+							<a href="{{url('/booking/'.$oneyacht->Yachts_id)}}"> <button padding="100px" class="btton">Заказать </button> </a>
+						</div>
+						<div id="dka">
+							<h1  @click="tutorialDemo">@{{countView}}</h1>
+
 
 						</div>
+
+						@else
+
+						<div class="panel-body" align="center">
+<h3>	Для дальнейшей работы зарегистрируйтесь или войдите в свой аккаунт!</h3><br><br>
+							<a href="{{ route('login') }}">Login</a>
+						<a href="{{ route('register') }}">Register</a></div>
+						@endauth
 					</div>
-				</div>
-				<div id="dka">
-					<h1  @click="tutorialDemo">@{{countView}}</h1>
-			
-				
+					@endif
 				</div>
 			</div>
-			
- <form action="/yachts" method="post">
-			<input type="text" name="countView" value=4 disabled="true">
-			<input type="text" name="id" value={{$yachts_id}} disabled="true">		 
-</form>
-		</body>
+		</div>
+		
 
-		<script src="https://code.jquery.com/jquery-3.2.1.min.js" crossorigin="anonymous"></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
-		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
-		<script src="https://unpkg.com/vue"></script>
+		
+	</div>
 
-		<script type="text/javascript">
-			var app = new Vue({
-				el: '#dka',
-				data: {
+	<form action="/yachts/{yachts_id}" method="post">
+		<input type="text" name="CountView" value=4 style="display: none">
+		<input type="text" name="id" value={{$yachts_id}} style="display: none">		
+		<input type="text" style="display: none" name="CountView" v-model="CountView" > 
+	</form>
+</body>
 
-					countView: 
-					@foreach($yacht as $yacht_view)
-					{{$yacht_view->Count_view}} @endforeach
-					
-					
-				},
-				methods: {
-					tutorialDemo: function() {
-						this.countView++
+<script src="https://code.jquery.com/jquery-3.2.1.min.js" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/vue"></script>
+
+<script type="text/javascript">
+	var app = new Vue({
+		el: '#dka',
+		data: {
+
+			countView: 
+			@foreach($yacht as $yacht_view)
+			{{$yacht_view->Count_view}} @endforeach
 
 
-					}
-				}})
-				</script>
-				</html>
+		},
+		methods: {
+			tutorialDemo: function() {
+				this.countView++
+
+
+			}
+		}})
+	</script>
+
+	<script src="photo/lightbox/js/lightbox-plus-jquery.min.js"></script>
+	</html>

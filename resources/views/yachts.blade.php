@@ -1,7 +1,7 @@
  @include('header')
  <?
  $marina=DB::table('countries')->join('marinas','Countries_id','=','marinas.countries_countries_id')->where('Countries_Countries_id', $Countries_id)->paginate(15);
- $yacht=DB::table('yachts')->join('marinas','Yacht_marina','=','marinas.marinas_id')->join('Yachts_photo','Yachts.Yachts_id','=','Yachts_photo.Yachts_id')->where('Marinas.Countries_Countries_id', $Countries_id)->paginate(15);
+ $yacht=DB::table('yachts')->join('marinas','Yacht_marina','=','marinas.marinas_id')->where('Marinas.Countries_Countries_id', $Countries_id)->paginate(15);
  ?>
  <title>Yachting</title>
 
@@ -53,7 +53,7 @@
 
           <div class="links" align="center">
             @foreach ($marina as $onemarina)
-            <a href="{{url($onemarina->Marinas_name)}}" style="padding:20px">{{$onemarina->Marinas_name}}</a>
+            <a href="{{url('/countries/'.$onemarina->Countries_id.'/'.$onemarina->Marinas_id)}}" style="padding:20px">{{$onemarina->Marinas_name}}</a>
 
             @endforeach
           </div>
@@ -67,15 +67,12 @@
               </thead>
 
               @foreach ($yacht as $oneyacht)
-              <tr> <td>{{$oneyacht->Yacht_name}} <br>
-                <img width="300px" src="{{asset($oneyacht->Yachts_photo_url)}}"> </td> 
-                <td><br>{!!$oneyacht->Yacht_about!!} <br>
-                 <div  @click="tutorialDemo"> <a href="{{url('/yachts/'.$oneyacht->Yachts_id)}}"> <button padding="1000px" class="btton">Просмотр </button> </a> 
-                  <form action="/yachts" method="post">
-                    <input type="text" name="countView" value=4 disabled="true">
-                    <input type="text" name="id" value={{$oneyacht->Yachts_id}} disabled="true">     
-                  </form>
-                </div></td>
+              <tr><td> {{$oneyacht->Yacht_name}} <br>
+                <img width="70%" src="{{asset($oneyacht->Yacht_main_photo)}}">  </td> 
+                <td>Год постройки: {{$oneyacht->Yacht_builtin}} <br>
+               Вместимость: {{$oneyacht->Yacht_guests_count}} человек<br>
+                  Стоимость: {{$oneyacht->Yacht_price}}€/за неделю<br></td>            
+                 <td> <a href="{{url('/yachts/'.$oneyacht->Yachts_id)}}"><button class="btton">Просмотр</button></a></td>
 
                 </tr>
 
@@ -108,7 +105,6 @@
         countView: 
         @foreach($yacht as $yacht_view)
         {{$yacht_view->Count_view}} @endforeach
-
 
       },
       methods: {

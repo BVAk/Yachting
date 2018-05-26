@@ -40,15 +40,15 @@ class BookController extends Controller
      */
 
 
-public function store(Request $request,$yachts_id)
+public function store(Yacht $yacht,$Count_view)
     {
     
      $Count_view = $request->input('countView');
-     $yachts_id = $request->input('yachts_id');
+     $yachts_id = $request->input('id');
 
-     DB::update ('update Yachts set Count_view = ? where Yachts_id = ?',[$Count_view,$yachts_id]);
-     
-      return view('previewyachts');
+      $yacht->update(['Count_view' => $Count_view]);
+        return redirect('/yachts/'.{{$yachts_id}.'');
+
  }
     /**
      * Display the specified resource.

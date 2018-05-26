@@ -45,10 +45,9 @@ class YachtController extends Controller
      $Count_view = $request->input('countView');
      $yachts_id = $request->input('yachts_id');
 
-  
-
-DB::update(DB::RAW('update yachts set Count_view = '  .'$Count_view'. '  where Yachts_id = ?' ,[$yachts_id]));
-
+     DB::update ('update Yachts set Count_view = ? where Yachts_id = ?',[$Count_view,$yachts_id];
+     
+      return view('previewyachts');
  }
 
     /**
@@ -68,11 +67,7 @@ DB::update(DB::RAW('update yachts set Count_view = '  .'$Count_view'. '  where Y
      * @param  \App\Yacht  $yacht
      * @return \Illuminate\Http\Response
      */
-    public function edit(Yacht $yacht)
-    {
-        //
-    }
-
+  
     /**
      * Update the specified resource in storage.
      *
@@ -80,9 +75,14 @@ DB::update(DB::RAW('update yachts set Count_view = '  .'$Count_view'. '  where Y
      * @param  \App\Yacht  $yacht
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Yacht $yacht)
+    public function edit($countView, Yacht $yacht)
     {
-        //
+        //  public function edit(Booking $booking, $status)
+    
+        
+        $yacht->update(['Count_View' => $countView]);
+        
+    
     }
 
     /**

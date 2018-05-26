@@ -1,5 +1,5 @@
  <?
- $all=DB::table('yachts')->join('marinas','Yacht_marina','=','marinas.marinas_id')->join('countries','Countries.Countries_id','=','marinas.countries_countries_id')->join('Yachts_photo','Yachts.Yachts_id','=','Yachts_photo.Yachts_id')->paginate(5);
+ $all=DB::table('yachts')->join('marinas','Yacht_marina','=','marinas.marinas_id')->join('countries','Countries.Countries_id','=','marinas.countries_countries_id')->paginate(5);
 $countries=DB::table('countries')->paginate(14);
  ?>
 
@@ -53,26 +53,32 @@ $countries=DB::table('countries')->paginate(14);
 
           @endforeach
         </div>
-        <div class="panel-body">
-          <table class="table">
-            <thead>
+          <div class="panel-body">
+            <table class="table">
+              <thead>
 
-              <th scope="col">Название яхты</th>
-              <th scope="col">О яхте</th>
+                <th scope="col">Название яхты</th>
+                <th scope="col">О яхте</th>
 
-            </thead>
+              </thead>
 
-            @foreach ($all as $oneall)
-            <tr> <td>{{$oneall->Yacht_name}} <br>
-              <img width="300px" src="{{asset($oneall->Yachts_photo_url)}}"> </td> 
-              <td><br>{!!$oneall->Yacht_about!!} <br>
-                <a href="{{url('/yachts/'.$oneall->Yachts_id)}}"> <button padding="100px" class="btton" >Просмотр </button> </a></td>
+              @foreach ($all as $oneyacht)
+              <tr><td> {{$oneyacht->Yacht_name}} <br>
 
-              </tr>
-              @endforeach
-            </table>
-          </div>
+                <img width="70%" src="{{asset($oneyacht->Yacht_main_photo)}}">  </td>   
+                 
+                <td>Год постройки: {{$oneyacht->Yacht_builtin}} <br>
+               Вместимость: {{$oneyacht->Yacht_guests_count}} человек<br>
+                  Стоимость: {{$oneyacht->Yacht_price}}€/за неделю<br></td>            
+                 <td> <a href="{{url('/yachts/'.$oneyacht->Yachts_id)}}"><button class="btton">Просмотр</button></a></td>
 
+                </tr>
+
+
+
+                @endforeach
+              </table>
+            </div>
           
           
         </div>

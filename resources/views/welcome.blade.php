@@ -157,7 +157,7 @@ html, body {
 
 
 
-}
+  }
 </script>
 </head>
 <body>
@@ -191,29 +191,29 @@ html, body {
                 </div>
 
                 <div class="links">
-                   <?$direct=' ';?>
-                   <a href="/countries">Страны</a>
-                   <a href="/yachts">Яхты</a>
-                   <a href="/skippers">Шкиперы</a>
+                 <?$direct=' ';?>
+                 <a href="/countries">Страны</a>
+                 <a href="/yachts">Яхты</a>
+                 <a href="/skippers">Шкиперы</a>
 
-               </div>
-           </div>
-       </div>
-   </div>
+             </div>
+         </div>
+     </div>
+ </div>
 
-   @extends('layouts.apps')
+ @extends('layouts.apps')
 
-   @section('content')
-   <div class="container">
+ @section('content')
+ <div class="container" id="countries">
     <div class="row">
         <div class="col-md-8 col-md-offset-2" style="padding:10px">
             <div class="panel panel-default">
 
 
                 <form role="form" class="form-inline" style="margin: 10px; padding: 10px; text-align: center; ">
-                 <div class="form-group">
+                   <div class="form-group">
                     <label for="directive">Направление</label>
-                    <select  name="country" id="country" onchange="inputcountry()" class="selectpicker" >
+                    <select  name="country" id="country-select" onchange="setCountry()" class="selectpicker" >
                       @foreach ($countries as $key => $data)
                       <option value="{{$data->Countries_id}}">{{$data->Countries_name}}</option>
                       @endforeach
@@ -224,7 +224,7 @@ html, body {
                 <label for="date">Дата</label>
                 <input type="date" onchange=" var dateElement = document.getElementById('date').value;" class="selectpicker" id="date" placeholder="Укажите дату">
             </div>
-            <a href="/countries"><button href="/countries"  class="btn btn-success" style="margin-left: 50px;">Поиск яхт</button></a>
+            <a id="country-link" class="btn btn-success" style="margin-left: 50px;">Поиск яхт</a>
         </form>
 
     </div>
@@ -293,7 +293,24 @@ html, body {
     <a class="left carousel-control" href="#thumbnail-preview-indicators" role="button" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a>
     <a class="right carousel-control" href="#thumbnail-preview-indicators" role="button" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>
 </div>
+<script type="text/javascript">
+    var countries = new Vue({
+        el: '#countries',
+        data: {
+            currentCountry: '',
+            test: 'Hello'
+        },
+        methods: {
+            setCountry(){
+            this.currentCountry = document.getElementById('country-select').value;
+            document.getElementById('country-link').href =  "/countries/" + this.currentCountry;
+        }
+    }})
 
+    function setCountry(){
+        return countries.setCountry();
+    }
+</script>
 </body>
 
 @endsection
