@@ -1,45 +1,74 @@
+<?
+$yachtName=DB::table('yachts')->get();?>
 @extends('admin.layouts.app_admin')
 
 @section('content')
 
-<div class="container">
+    <div class="container">
 
-  @component('admin.components.breadcrumb')
-    @slot('title') Список категорий @endslot
-    @slot('parent') Главная @endslot
-    @slot('active') Категории @endslot
-  @endcomponent
+        @component('admin.components.breadcrumb')
+            @slot('title') Заказы @endslot
+            @slot('parent') Главная @endslot
+            @slot('active') Просмотр заказов @endslot
+        @endcomponent
 
-  <hr>
+    </div>
 
-  <a href="{{route('admin.category.index')}}" class="btn btn-primary pull-right"><i class="fa fa-plus-square-o"></i> Создать категорию</a>
-  <table class="table table-striped">
-    <thead>
-      <th>Наименование</th>
-      <th>Публикация</th>
-      <th class="text-right">Действие</th>
-    </thead>
-    <tbody>
-      @forelse ($categories as $category)
-        <tr>
-          <td>{{$category->title}}</td>
-          <td>{{$category->published}}</td>
-          <td>
-            <a href="{{route('admin.category.edit', ['id'=>$category->id])}}"><i class="fa fa-edit"></i></a>
-          </td>
-        </tr>
-      @empty
-        <tr>
-          <td colspan="3" class="text-center"><h2>Данные отсутствуют</h2></td>
-        </tr>
-      @endforelse
-    </tbody>
-    <td colspan="3">
-    	<ul class="pagination pull-right">
-    		{{$categories->links()}}
-    	</ul>
-    </td>
-  </table>
-</div>
+    <div class="container">
+    <div class="row" id="select">
+        <select name="country" id="yacht-select" onchange="setYacht()" class="selectpicker">
+            @foreach ($yachtName as $key => $data)
+                <option value="{{$data->Yacht_name}}">{{$data->Yacht_name}}</option>
+
+            @endforeach
+
+        </select>
+    </div>
+    </div>
 
 @endsection
+<script>
+
+    Vue.http.headers.common['X-CSRF-TOKEN'] = document.querySelector('#token').getAttribute('content');
+
+    new Vue({
+        el: '#inform',
+        data: {
+            inf: []
+        },
+        mounted: function () {
+            this.fetchInf();
+        },
+
+        methods: {
+            fetchInf: function () {
+                this.$http.get('http://jsonplaceholder.typicode.com/posts').then(function (response) {
+                    this.inf = response.body;
+                    console.log(this.inf);
+                })
+            }
+        }
+    });
+
+</script>
+
+<script type="text/javascript">
+    Vue.http.headers.common['X-CSRF-TOKEN'] = document.querySelector('#token').getAttribute('content');
+        var app = new Vue({
+            el: '#select',
+            data: {
+
+                yacht:
+                [document.getElementById('yacht-select').value]
+
+
+    },
+        methods: {
+
+            setYacht:function(){
+                console.log(this.yacht);
+            }
+
+        }})
+
+</script>

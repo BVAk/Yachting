@@ -1,7 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
 use Carbon\Carbon;
 use Carbon\CarbonInterval;
 use DB;
@@ -19,8 +20,8 @@ class BookController extends Controller
      */
     public function index()
     {
-       $all=DB::table('yachts')->join('marinas','Yacht_marina','=','marinas.marinas_id')->join('countries','Countries.Countries_id','=','marinas.countries_countries_id')->join('Yachts_photo','Yachts.Yachts_id','=','Yachts_photo.Yachts_id')->paginate(15);
-       return view('allyachts')->with ('all', $all);
+     $all=DB::table('yachts')->join('marinas','Yacht_marina','=','marinas.marinas_id')->join('countries','Countries.Countries_id','=','marinas.countries_countries_id')->join('Yachts_photo','Yachts.Yachts_id','=','Yachts_photo.Yachts_id')->paginate(15);
+     return view('allyachts')->with ('all', $all);
    }
 
     /**
@@ -43,41 +44,46 @@ class BookController extends Controller
     public function getDates()
     {
 
-        $current = Carbon::now();
-        $date = Carbon::now()->addDays(3);
-        printf($current);
-        printf($date);
+      $current = Carbon::now();
+      $date = Carbon::now()->addDays(3);
+      printf($current);
+      printf($date);
     }
 
     public function store(Request $request)
     {
-       $Users_id = $request->input('Users_id');
-       $Yachts_Yachts_id = $request->input('Yachts_Yachts_id');
-       $Booking_date =new \DateTime('now');
-       $Booking_date_otpr = $request->input('Booking_date_otpr');
-       $Booking_date_prib=new \DateTime($Booking_date_otpr);
-       $Booking_date_prib->modify('+ 7 days');
-       $Booking_status = $request->input('Booking_status');
-       $cost=$request->input('cost');
-       $is_avaible = true;
-       for($i = 0; $i < 7; $i ++){
-        $currentDate = new \DateTime($request->input('Booking_date_otpr'));
-        $currentDate->modify('+ '.$i.' days');
-        if(Booking::where('Booking_status','!=',"отменено" )->where('Booking_date_prib', $currentDate->format('Y-m-d'))
-            ->orWhere('Booking_date_otpr', $currentDate->format('Y-m-d'))->count() > 0) {
-            $is_avaible = false;
-            break;
-           }
-       }
+     $Users_id = $request->input('Users_id');
+     $Yachts_Yachts_id = $request->input('Yachts_Yachts_id');
+     $Booking_date =new \DateTime('now');
+     $Booking_date_otpr = $request->input('Booking_date_otpr');
+     $Booking_date_prib=new \DateTime($Booking_date_otpr);
+     $Booking_date_prib->modify('+ 7 days');
+     $Booking_status = $request->input('Booking_status');
+     $cost=$request->input('cost');
+     $is_avaible = true;
+     for($i = 0; $i < 7; $i ++){
+      $currentDate = new \DateTime($request->input('Booking_date_otpr'));
+      $currentDate->modify('+ '.$i.' days');
+      if(Booking::where('Booking_status','!=',"отменено" )->where('Booking_date_prib', $currentDate->format('Y-m-d'))
+        ->orWhere('Booking_date_otpr', $currentDate->format('Y-m-d'))->count() > 0) {
+        $is_avaible = false;
+      break;
+    }
+    if(Yacht::where('Yachts_id',$Yachts_Yachts_id)->where('Yacht_date_contract',$currentDate->format('Y-m-d'))->count() > 0){
+      $is_avaible = false;
+      break;
+    }
+  }
 
-       if($is_avaible){
-        $data = array('Users_id'=>$Users_id,'Yachts_Yachts_id'=>$Yachts_Yachts_id, 'Booking_date'=>$Booking_date, 'Booking_date_otpr'=>$Booking_date_otpr,'Booking_date_prib'=>$Booking_date_prib,'Booking_status'=>$Booking_status,'Booking_cost'=>$cost);
-       DB::table('Booking')->insert($data);
-       }
-       else return redirect()->back()->with('status', 'Выбранные даты уже заняты');
-       return redirect()->route('home');
-       
-   }
+
+  if($is_avaible){
+    $data = array('Users_id'=>$Users_id,'Yachts_Yachts_id'=>$Yachts_Yachts_id, 'Booking_date'=>$Booking_date, 'Booking_date_otpr'=>$Booking_date_otpr,'Booking_date_prib'=>$Booking_date_prib,'Booking_status'=>$Booking_status,'Booking_cost'=>$cost);
+    DB::table('Booking')->insert($data);
+  }
+  else return redirect()->back()->with('status', 'Выбранные даты уже заняты');
+  return redirect()->route('home');
+
+}
     /**
      * Display the specified resource.
      *
@@ -118,10 +124,10 @@ class BookController extends Controller
      * @param  \App\Yacht  $yacht
      * @return \Illuminate\Http\Response
      */
-   
+
     
-        public function destroy(Yacht $yacht)
-        {
+    public function destroy(Yacht $yacht)
+    {
         //
-        }
     }
+  }

@@ -3,8 +3,12 @@ date_default_timezone_set('UTC');
 $date = date('Y-m-d', time());
 $users = DB::table('users')->count();
 $yachts=DB::table('yachts')->count();
+$yachtName=DB::table('yachts')->get();
+$yacht = DB::table('booking')->join('yachts','booking.yachts_yachts_id','=','yachts.yachts_id')->get();
+
 $booking = DB::table('booking')->select(DB::raw('count(*) as booking_count, booking_date'))->groupBy('booking_date')->get();
 $bookingnow = DB::table('booking')->select(DB::raw('count(*) as booking_count, booking_date'))->groupBy('booking_date')->where('booking_date','=',$date)->get();
+$bookings= DB::table('booking')->where('booking.booking_status','=','оплачено')->get();
 ?>
 
 @extends('admin.layouts.app_admin')
@@ -12,8 +16,16 @@ $bookingnow = DB::table('booking')->select(DB::raw('count(*) as booking_count, b
 @section('content')
 
     <div class="container">
-        <div class="row">
-            
+        <div class="row" id="select">
+             <select  name="country" id="yacht-select" onchange="setYacht()" class="selectpicker" >
+                      @foreach ($yachtName as $key => $data)
+                      <option value="{{$data->Yacht_name}}">{{$data->Yacht_name}}</option>
+                      
+                      @endforeach
+
+                  </select>
+              
+
             <div class="col-sm-3">
                 <div class="jumbotron text-center">
                     <p><span class="label label-primary">Яхт {{$yachts}}</span></p>
@@ -42,6 +54,7 @@ $bookingnow = DB::table('booking')->select(DB::raw('count(*) as booking_count, b
         @endforeach
     </div>
 
+
 @endsection
 @section('scripts')
     <script>
@@ -68,4 +81,26 @@ $bookingnow = DB::table('booking')->select(DB::raw('count(*) as booking_count, b
         });
 
     </script>
+    <script type="text/javascript">
+  function setYacht() {
+     var app = new Vue({
+    el: '#select',
+    data: {
+
+      yacht: 
+       document.getElementById('yacht-select').value;
+    
+
+    },
+    methods: {
+
+     setYacht(){
+       
+       
+console.log(this.yacht);
+    }
+
+  }})
+  }
+</script>
 @endsection

@@ -1,7 +1,3 @@
- <?
- $all=DB::table('yachts')->join('marinas','Yacht_marina','=','marinas.marinas_id')->join('countries','Countries.Countries_id','=','marinas.countries_countries_id')->paginate(5);
-$countries=DB::table('countries')->paginate(14);
- ?>
 
  <title>Yachting</title>
 

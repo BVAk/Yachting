@@ -78,8 +78,13 @@
               {{ session('booking_id') }}
             </div>
             @endif
+            @if (session('status'))
+            <div class="alert alert-success">
+              {{ session('status') }}
+            </div>
+            @endif
 
-           <h1> Оплата</h1>
+            <h1> Оплата</h1>
           </div>
 
           <div class="table-responsive" >
@@ -97,46 +102,47 @@
              <tr> 
               <td>
                {{$oneall->Booking_date_otpr}} - {{$oneall->Booking_date_prib}} </td>
-                <td>{{$oneall->Yacht_name}} <br>
-                  <img width="300px" src="{{asset($oneall->Yacht_main_photo)}}"> </td> 
-                  <td>Страна: {{$oneall->Countries_name}} <br>Марина: {{$oneall->Marinas_name}}
+               <td>{{$oneall->Yacht_name}} <br>
+                <img width="300px" src="{{asset($oneall->Yacht_main_photo)}}"> </td> 
+                <td>Страна: {{$oneall->Countries_name}} <br>Марина: {{$oneall->Marinas_name}}
+                </td>
+                <td>Статус заказа: {{$oneall->Booking_status}}<br> 
+                  Стоимость:<br> {{$oneall->Booking_cost}} €</td><td>
+
+
+
                   </td>
-                  <td>Статус заказа: {{$oneall->Booking_status}}<br> 
-                    Стоимость: {{$oneall->Booking_cost}} €</td><td>
-                     
 
-
-                    </td>
-
-                  </tr>
+                </tr>
 
 
 
-                  @endforeach
+                @endforeach
 
-                </tbody>
-              </table>
+              </tbody>
+            </table>
+            <form action="/url" role="form" method="POST" enctype="multipart/form-data">
+              {{csrf_field()}}
+              @foreach ($all as $oneall) <div align="center">
+                Для подтверждении брони, просим оплатить пол стоимости Вашего заказа: <h3>{{($oneall->Booking_cost)/2}} €</h3> 
+                <h5>Реквизиты:</h5> карточка ПриватБанка: <br> <h3> #4731217104018815</h3><br>
+                Получатель Карпин Владимир Йосипович. <br>
 
-             @foreach ($all as $oneall) <div align="center">
-              Для подтверждении брони, просим оплатить пол стоимости Вашего заказа: <h3>{{($oneall->Booking_cost)/2}} €</h3> 
-              <h5>Реквизиты:</h5> карточка ПриватБанка: <br> <h3> #4731217104018815</h3><br>
-              Получатель Карпин Владимир Йосипович. <br>
-  
-     В случае вопросов и уточнений, обращаться по телефону:<br> 050 862 88 78 <br>або<br> 067 344 06 81 </div>
-
-      <form method="post" action="{{ route('upload_file') }}" enctype="multipart/form-data">
-            <input name="_token" type="hidden" value="{{ csrf_token() }}">
-            <input type="file" multiple name="file[]">
-            <button type="submit">Загрузить</button>
-        </form>
-
-                      <a href="{{url('/'.$oneall->Booking_id.'/edit/оплачено')}}"><button align="center"  class="btton">Оплатить </button></a>@endforeach<br><br>
-            </div>
-
-          </div>
-        </div>
-      </div>
-    </div>
+                В случае вопросов и уточнений, обращаться по телефону:<br> 050 862 88 78 <br>или<br> 067 344 06 81 
+              </div>
+              <input type="file" name="image">
+              <input type="hidden" name="booking_id" value="{{$oneall->Booking_id}}">
+              
+              <div align="center">
+               <button align="center" type="submit" class="btton">Оплатить </button></div>@endforeach 
+             </form>
+             <br><br>
+           </div>
+         </div>
+       </div>
+     </div>
+   </div>
+ </div>
 
 
-  </body>
+</body>

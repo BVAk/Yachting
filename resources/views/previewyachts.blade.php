@@ -72,7 +72,7 @@ $yacht=DB::table('yachts')->join('marinas','Yacht_marina','=','marinas.marinas_i
 						</h1></div>
 
 						<div class="links" >
-							<a href="{{url($countryname->Marinas_name)}}" style="padding:20px">{{$countryname->Marinas_name}}</a>
+							<a href="/countries/{{$countryname->Countries_id}}/{{$countryname->Marinas_id}}" style="padding:20px">{{$countryname->Marinas_name}}</a>
 						</div>
 						@break
 
@@ -123,14 +123,13 @@ $yacht=DB::table('yachts')->join('marinas','Yacht_marina','=','marinas.marinas_i
 								@endforeach
 							</table>
 							<br>
-							<a href="{{url('/booking/'.$oneyacht->Yachts_id)}}"> <button padding="100px" class="btton">Заказать </button> </a>
+							@foreach ($yacht as $oneyacht)
+							<a href="/booking/{{$oneyacht->Yachts_id}}"> <button padding="100px" class="btton">Заказать </button> </a>
+							@break
+
+								@endforeach
 						</div>
-						<div id="dka">
-							<h1  @click="tutorialDemo">@{{countView}}</h1>
-
-
-						</div>
-
+	
 						@else
 
 						<div class="panel-body" align="center">
@@ -149,9 +148,9 @@ $yacht=DB::table('yachts')->join('marinas','Yacht_marina','=','marinas.marinas_i
 	</div>
 
 	<form action="/yachts/{yachts_id}" method="post">
-		<input type="text" name="CountView" value=4 style="display: none">
+	
 		<input type="text" name="id" value={{$yachts_id}} style="display: none">		
-		<input type="text" style="display: none" name="CountView" v-model="CountView" > 
+	
 	</form>
 </body>
 
@@ -160,25 +159,7 @@ $yacht=DB::table('yachts')->join('marinas','Yacht_marina','=','marinas.marinas_i
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
 <script src="https://unpkg.com/vue"></script>
 
-<script type="text/javascript">
-	var app = new Vue({
-		el: '#dka',
-		data: {
 
-			countView: 
-			@foreach($yacht as $yacht_view)
-			{{$yacht_view->Count_view}} @endforeach
-
-
-		},
-		methods: {
-			tutorialDemo: function() {
-				this.countView++
-
-
-			}
-		}})
-	</script>
 
 	<script src="photo/lightbox/js/lightbox-plus-jquery.min.js"></script>
 	</html>

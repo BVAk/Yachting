@@ -39,11 +39,11 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="nav navbar-nav">
                        <li class="dropdown">
-                           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expaanded="false">Добавить</a>
+                           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expaanded="false">Заказы</a>
                            <ul class="dropdown-menu" role="menu">
 
-                           <li><a href ="/addyacht">Яхту</a></li>
-                            <li><a href ="#">Шкипера</a></li></ul>
+                           <li><a href ="/admin/podtverZakaz">Подтвердить заказы</a></li>
+                            <li><a href ="/admin/Zakazi">Промотр заказов</a></li></ul>
                        </li>
                     </ul>
 

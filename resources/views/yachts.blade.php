@@ -1,7 +1,12 @@
- @include('header')
+
  <?
+ 
+use Carbon\Carbon;
+use Carbon\CarbonInterval;
+  $date = Carbon::now()->addDays(7);
+    $yacht=DB::table('yachts')->join('marinas','Yacht_marina','=','marinas.marinas_id')->where('Marinas.Countries_Countries_id', $Countries_id)->where('yachts.yacht_date_contract','>=',$date)->paginate(15);
  $marina=DB::table('countries')->join('marinas','Countries_id','=','marinas.countries_countries_id')->where('Countries_Countries_id', $Countries_id)->paginate(15);
- $yacht=DB::table('yachts')->join('marinas','Yacht_marina','=','marinas.marinas_id')->where('Marinas.Countries_Countries_id', $Countries_id)->paginate(15);
+
  ?>
  <title>Yachting</title>
 
@@ -36,12 +41,12 @@
 </style>
 
 <body>
-
+ @include('header')
 
 
   <div class="container">
     <div class="row">
-      <div class="col-md-8 col-md-offset-2">
+      <div class="col-md-9 col-md-offset-2">
         <div class="panel panel-default">
 
 
@@ -67,15 +72,23 @@
               </thead>
 
               @foreach ($yacht as $oneyacht)
+
+              <form action="/insert" method="POST">
+                      {{ csrf_field() }}
+               <input type="hidden" name="id" value="{{$oneyacht->Yachts_id}}">
+          
+              
+
+
               <tr><td> {{$oneyacht->Yacht_name}} <br>
                 <img width="70%" src="{{asset($oneyacht->Yacht_main_photo)}}">  </td> 
                 <td>Год постройки: {{$oneyacht->Yacht_builtin}} <br>
                Вместимость: {{$oneyacht->Yacht_guests_count}} человек<br>
                   Стоимость: {{$oneyacht->Yacht_price}}€/за неделю<br></td>            
-                 <td> <a href="{{url('/yachts/'.$oneyacht->Yachts_id)}}"><button class="btton">Просмотр</button></a></td>
+                 <td> <button type="submit" class="btton">Просмотр</button></td>
 
                 </tr>
-
+</form>
 
 
                 @endforeach

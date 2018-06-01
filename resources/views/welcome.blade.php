@@ -102,7 +102,7 @@ html, body {
     font-family: 'OCR A Std',monospace, sans-serif;
     font-weight: 100;
     margin: 0;
-    background: linear-gradient(to bottom, #2bc0e4,#eaecc6);
+    background: linear-gradient(to bottom, #2bc0e4,#2bc0e4);
 }
 
 .full-height {
@@ -177,10 +177,10 @@ html, body {
             @if (Route::has('login'))
             <div class="top-right links">
                 @auth
-                <a href="{{ url('/home') }}">Home</a>
+                <a href="{{ url('/home') }}">Мои <br>заказы</a>
                 @else
-                <a href="{{ route('login') }}">Login</a>
-                <a href="{{ route('register') }}">Register</a>
+                <a href="{{ route('login') }}">Войти</a>
+                <a href="{{ route('register') }}">Регистрация</a>
                 @endauth
             </div>
             @endif
@@ -194,7 +194,7 @@ html, body {
                  <?$direct=' ';?>
                  <a href="/countries">Страны</a>
                  <a href="/yachts">Яхты</a>
-                 <a href="/skippers">Шкиперы</a>
+                 <a href="/routes">Маршруты</a>
 
              </div>
          </div>
@@ -222,9 +222,9 @@ html, body {
               </div>
               <div class="form-group " style="margin-left: 50px;">
                 <label for="date">Дата</label>
-                <input type="date" onchange=" var dateElement = document.getElementById('date').value;" class="selectpicker" id="date" placeholder="Укажите дату">
+                <input type="date" onchange=" setCountry()" class="selectpicker" id="date" placeholder="Укажите дату" >
             </div>
-            <a id="country-link" class="btn btn-success" style="margin-left: 50px;">Поиск яхт</a>
+            <a id="country-link" onclick="setCountry()" class="btn btn-success" style="margin-left: 50px;">Поиск яхт</a>
         </form>
 
     </div>
@@ -303,7 +303,11 @@ html, body {
         methods: {
             setCountry(){
             this.currentCountry = document.getElementById('country-select').value;
-            document.getElementById('country-link').href =  "/countries/" + this.currentCountry;
+            this.Date = document.getElementById('date').valueAsDate = new Date();
+            document.getElementById('country-link').href =  "/" + this.currentCountry+"/"+this.Date;
+        }
+           setDate(){
+            
         }
     }})
 

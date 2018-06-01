@@ -27,7 +27,7 @@ clear: both;
 				<div class="panel panel-default">
 					<div class="panel-body">
 
-						<div class="content row" width="800px" text-align="center">
+						<div class="content row" width="100%" text-align="center">
 							@foreach ($a as $key => $data)
 							<div class="column">
 								<tr class="category-list clearfix"><td> <a href="/countries/{{$data->Countries_id}}" > {{$data->Countries_name}}</a></td><br>

@@ -1,5 +1,6 @@
 @include('header')
-<?$all=DB::table('yachts')->join('marinas','Yacht_marina','=','marinas.marinas_id')->join('countries','Countries.Countries_id','=','marinas.countries_countries_id')->where('Yachts.Yachts_id', $yachts_id)->paginate(15); ?>
+<?$all=DB::table('yachts')->join('marinas','Yacht_marina','=','marinas.marinas_id')->join('countries','Countries.Countries_id','=','marinas.countries_countries_id')->where('Yachts.Yachts_id', $yachts_id)->paginate(15);
+  $Booking_date =new \DateTime('now'); ?>
 <title>Yachting</title>
 <style>
 .btton {
@@ -31,10 +32,6 @@
 
 </style>
 <script language="javascript">
-  function book(){
-
-    alert('Ваш заказ принят. Просим Вас внести предоплату в течении 2 дней ');
-  }
 
 </script>
 
@@ -63,7 +60,7 @@
                 {{csrf_field()}}
                 <div id="dka">
                   @foreach($all as $marina)                <label for="date">Дата отправления</label>
-                  <input type="date" class="form-control" id="date" name="Booking_date_otpr" placeholder="Укажите дату" onchange="     
+                  <input type="date" min="2018-05-30" class="form-control" id="date" name="Booking_date_otpr" placeholder="Укажите дату" onchange="     
                   var dateElement = document.getElementById('date').value;
                   var dateStart = new Date(dateElement); 
 

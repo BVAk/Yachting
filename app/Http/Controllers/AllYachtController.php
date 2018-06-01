@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use DB;
 use App\Yacht;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
+use Carbon\CarbonInterval;
 
 
 class AllYachtController extends Controller
@@ -16,10 +18,11 @@ class AllYachtController extends Controller
      */
     public function index()
     {
+        $date = Carbon::now()->addDays(7);
         
-        
-       $all=DB::table('yachts')->join('marinas','Yacht_marina','=','marinas.marinas_id')->join('countries','Countries.Countries_id','=','marinas.countries_countries_id')->join('Yachts_photo','Yachts.Yachts_id','=','Yachts_photo.Yachts_id')->paginate(15);
-        return view('allyachts')->with ('all', $all);
+       $all=DB::table('yachts')->join('marinas','Yacht_marina','=','marinas.marinas_id')->join('countries','Countries.Countries_id','=','marinas.countries_countries_id')->where('yachts.yacht_date_contract','>=',$date)->paginate(5);
+       $countries=DB::table('countries')->paginate(14);
+        return view('allyachts')->with ('all', $all)->with('date',$date)->with('countries',$countries);
     }
 
     /**
