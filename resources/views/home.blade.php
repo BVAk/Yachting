@@ -1,3 +1,4 @@
+
 @include('header')
 <style>
 
@@ -36,57 +37,6 @@
         cursor: pointer;
     }
 
-    .btton {
-        display: inline-block;
-        vertical-align: center;
-        alignment-baseline: central;
-        height: 48px;
-        line-height: 46px;
-        padding: 0 23px;
-        font-family: inherit;
-        font-size: 15px;
-        color: #bbb;
-        text-align: center;
-        text-decoration: none;
-        text-shadow: 0 0 2px rgba(0, 0, 0, 0.7);
-        background-color: #303030;
-        background-clip: padding-box;
-        border: 1px solid;
-        border-color: #202020 #1a1a1a #111;
-        border-radius: 20px;
-        background-image: -webkit-linear-gradient(top, #3d3d3d, #272727);
-        background-image: -moz-linear-gradient(top, #3d3d3d, #272727);
-        background-image: -o-linear-gradient(top, #3d3d3d, #272727);
-        background-image: linear-gradient(to bottom, #3d3d3d, #272727);
-        -webkit-box-shadow: inset 0 1px rgba(255, 255, 255, 0.09), 0 1px 3px rgba(0, 0, 0, 0.3);
-        box-shadow: inset 0 1px rgba(255, 255, 255, 0.09), 0 1px 3px rgba(0, 0, 0, 0.3);
-
-    }
-
-    .btton-danger {
-        display: inline-block;
-        vertical-align: center;
-        alignment-baseline: central;
-        height: 48px;
-        line-height: 46px;
-        padding: 0 23px;
-        font-family: inherit;
-        font-size: 15px;
-        color: #bbb;
-        text-align: center;
-        text-decoration: none;
-        text-shadow: 0 0 2px rgba(0, 0, 0, 0.7);
-        background-color: red;
-        background-clip: padding-box;
-        border: 1px solid;
-        border-color: #202020 #1a1a1a #111;
-        border-radius: 20px;
-
-
-        -webkit-box-shadow: inset 0 1px rgba(255, 255, 255, 0.09), 0 1px 3px rgba(0, 0, 0, 0.3);
-        box-shadow: inset 0 1px rgba(255, 255, 255, 0.09), 0 1px 3px rgba(0, 0, 0, 0.3);
-
-    }
 </style>
 
 <script language="javascript">
@@ -98,25 +48,31 @@
 
 </script>
 
+<script type="text/javascript">
+    function printContent(el) {
+        var restorepage = document.body.innerHTML;
+        var printcontent = document.getElementById(el).innerHTML;
+        document.body.innerHTML = printcontent;
+        window.show();
+        document.body.innerHTML = restorepage;
+    }
+</script>
 <body>
 
 <div class="container">
     <div class="row">
-        <div class="col-md-8 col-md-offset-2">
+        <div class="col-md-9 col-md-offset-2">
             <div class="panel panel-default">
-                <div class="panel-heading"> {{ Auth::user()->name }}</div>
-
-                <div class="panel-body">
-                    @if (session('status'))
+                <div class="panel-heading" align="center"><h3> {{ Auth::user()->name }},     @if (session('status'))
                         <div class="alert alert-success">
                             {{ session('status') }}
                         </div>
                     @endif
 
-                    Ваши заказы:
-                </div>
+                    Ваши заказы: </h3></div>
 
-                <div class="table-responsive">
+
+                <div class="table">
                     <table class="table">
                         <thead>
                         <tr>
@@ -142,19 +98,19 @@
                         </div>
 
                         <a href="/yachts/{{$oneall->Yachts_id}}">
-                            <button align="center" class="btton">Подробнее</button>
+                            <button align="center" class="btton-click">Подробнее</button>
                         </a><br>
 
                         <div id="oplata">
-                            <p :onload="oplatit()">@{{oplata}}</p>
+                            <p :onload="oplatit()"></p>
 
                         </div>
-
+                        <button onclick="printContent('1')">Print</button>
 
                         <a href="/{{$oneall->Booking_id}}/oplata/">
                             <button align="center" class="btton">Оплатить</button>
                         </a><br><br>
-
+                        <a href="{{'/downloadPDF/'.$oneall->Booking_id}}">PDF</a>
                         <button class=" btton-danger" onclick="delet('block')">Отменить</button>
                         <div id="wrap">></div>
                         <div id="window">
@@ -227,4 +183,6 @@
     }
     })
 </script>
+
+@INCLUDE ('footer')
 </body>

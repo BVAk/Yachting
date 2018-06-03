@@ -128,12 +128,11 @@
                 <h5>Реквизиты:</h5> карточка ПриватБанка: <br> <h3> #4731217104018815</h3><br>
                 Получатель Карпин Владимир Йосипович. <br>
 
-                В случае вопросов и уточнений, обращаться по телефону:<br> 050 862 88 78 <br>или<br> 067 344 06 81 
-              </div>
-              <input type="file" name="image">
+              <input type="file" name="image"<br><br>
+                    <div class="panel-default">
               <input type="hidden" name="booking_id" value="{{$oneall->Booking_id}}">
-              
-              <div align="center">
+                    </div>
+
                <button align="center" type="submit" class="btton">Оплатить </button></div>@endforeach 
              </form>
              <br><br>
@@ -144,5 +143,5 @@
    </div>
  </div>
 
-
+  @INCLUDE ('footer')
 </body>

@@ -51,7 +51,7 @@ $yachtNames = DB::table('yachts')->get();
                 @endforeach
             </select>
             <table>
-                @if (isset($yacht))
+                @if (isset($routes))
                     {
                 <thead>
                 <th>Название яхты</th>

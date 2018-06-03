@@ -11,33 +11,6 @@ use Carbon\CarbonInterval;
  <title>Yachting</title>
 
  <style>
- .btton {
-  display: inline-block;
-  vertical-align: top;
-  height: 48px;
-  line-height: 46px;
-  padding: 0 25px;
-  font-family: inherit;
-  font-size: 15px;
-  color: #bbb;
-  text-align: center;
-  text-decoration: none;
-  text-shadow: 0 0 2px rgba(0, 0, 0, 0.7);
-  background-color: #303030;
-  background-clip: padding-box;
-  border: 1px solid;
-  border-color: #202020 #1a1a1a #111;
-  border-radius: 25px;
-  background-image: -webkit-linear-gradient(top, #3d3d3d, #272727);
-  background-image: -moz-linear-gradient(top, #3d3d3d, #272727);
-  background-image: -o-linear-gradient(top, #3d3d3d, #272727);
-  background-image: linear-gradient(to bottom, #3d3d3d, #272727);
-  -webkit-box-shadow: inset 0 1px rgba(255, 255, 255, 0.09), 0 1px 3px rgba(0, 0, 0, 0.3);
-  box-shadow: inset 0 1px rgba(255, 255, 255, 0.09), 0 1px 3px rgba(0, 0, 0, 0.3);
-
-}
-
-
 </style>
 
 <body>
@@ -102,7 +75,7 @@ use Carbon\CarbonInterval;
         </div>
       </div>
     </div>
-
+ @INCLUDE ('footer')
 
   </body>
   <script src="https://code.jquery.com/jquery-3.2.1.min.js" crossorigin="anonymous"></script>

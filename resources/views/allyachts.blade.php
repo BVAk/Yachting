@@ -2,32 +2,6 @@
  <title>Yachting</title>
 
  <style>
- .btton {
-  display: inline-block;
-  vertical-align: top;
-  height: 48px;
-  line-height: 46px;
-  padding: 0 25px;
-  font-family: inherit;
-  font-size: 15px;
-  color: #bbb;
-  text-align: center;
-  text-decoration: none;
-  text-shadow: 0 0 2px rgba(0, 0, 0, 0.7);
-  background-color: #303030;
-  background-clip: padding-box;
-  border: 1px solid;
-  border-color: #202020 #1a1a1a #111;
-  border-radius: 25px;
-  background-image: -webkit-linear-gradient(top, #3d3d3d, #272727);
-  background-image: -moz-linear-gradient(top, #3d3d3d, #272727);
-  background-image: -o-linear-gradient(top, #3d3d3d, #272727);
-  background-image: linear-gradient(to bottom, #3d3d3d, #272727);
-  -webkit-box-shadow: inset 0 1px rgba(255, 255, 255, 0.09), 0 1px 3px rgba(0, 0, 0, 0.3);
-  box-shadow: inset 0 1px rgba(255, 255, 255, 0.09), 0 1px 3px rgba(0, 0, 0, 0.3);
-  
-}
-
 
 </style>
 
@@ -59,18 +33,22 @@
               </thead>
 
               @foreach ($all as $oneyacht)
-              <tr><td> {{$oneyacht->Yacht_name}} <br>
+                    <form action="/insert" method="POST">
+                        {{ csrf_field() }}
+                        <input type="hidden" name="id" value="{{$oneyacht->Yachts_id}}">
+
+                        <tr><td> {{$oneyacht->Yacht_name}} <br>
 
                 <img width="70%" src="{{asset($oneyacht->Yacht_main_photo)}}">  </td>   
                  
                 <td>Год постройки: {{$oneyacht->Yacht_builtin}} <br>
                Вместимость: {{$oneyacht->Yacht_guests_count}} человек<br>
                   Стоимость: {{$oneyacht->Yacht_price}}€/за неделю<br></td>            
-                 <td> <a href="{{url('/yachts/'.$oneyacht->Yachts_id)}}"><button class="btton">Просмотр</button></a></td>
+                 <td> <a href="{{url('/yachts/'.$oneyacht->Yachts_id)}}"><button type="submit" class="btton">Просмотр</button></a></td>
 
                 </tr>
 
-
+                    </form>
 
                 @endforeach
               </table>
@@ -81,5 +59,5 @@
       </div>
     </div>
   </div>
-  
+  @INCLUDE ('footer')
 </body>

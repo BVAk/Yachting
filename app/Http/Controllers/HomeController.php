@@ -8,6 +8,7 @@ use Carbon\Carbon;
 use Carbon\CarbonInterval;
 use Illuminate\Http\Request;
 use Auth;
+use PDF;
 
 class HomeController extends Controller
 {
@@ -16,6 +17,14 @@ class HomeController extends Controller
      *
      * @return void
      */
+   public function downloadPDF($booking_id){
+       $book = DB::table('booking')->join('users','booking.users_id','=','users.id')->join('yachts','yachts.yachts_id','=','booking.yachts_yachts_id')->where('booking.booking_id','=',$booking_id);
+
+       $pdf = PDF::loadView('pdf', compact('book'));
+       return $pdf->download('invoice.pdf');
+
+
+   }
     public function __construct()
     {
         $this->middleware('auth');
@@ -36,8 +45,9 @@ class HomeController extends Controller
 
     public function edit(Booking $booking, $status)
     {
-        
+
         $booking->update(['Booking_status' => $status]);
+        $bookings=DB::table('booking')->where('Booking_status','=','отменено')->where('Booking_money_oplacheno','=',"0")->delete();
         return redirect('/home');
     }
    

@@ -106,7 +106,7 @@
     </div>
   </div>
 
-
+  @INCLUDE ('footer')
 </body>
 
 <script type="text/javascript">
@@ -123,7 +123,7 @@
     methods: {
 
      setCost(status){
-       if(status) this.cost = parseInt(1.1 * this.cost);
+       if(status) this.cost = parseInt(1.15 * this.cost);
        else this.cost =   @foreach($all as $marina)
         {{$marina->Yacht_price}} @endforeach;
 

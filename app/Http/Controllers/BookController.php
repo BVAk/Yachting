@@ -64,7 +64,7 @@ class BookController extends Controller
      for($i = 0; $i < 7; $i ++){
       $currentDate = new \DateTime($request->input('Booking_date_otpr'));
       $currentDate->modify('+ '.$i.' days');
-      if(Booking::where('Booking_status','!=',"отменено" )->where('Booking_date_prib', $currentDate->format('Y-m-d'))
+      if(Booking::where('Yachts_Yachts_id',$Yachts_Yachts_id)->where('Booking_status','!=',"отменено" )->where('Booking_date_prib', $currentDate->format('Y-m-d'))
         ->orWhere('Booking_date_otpr', $currentDate->format('Y-m-d'))->count() > 0) {
         $is_avaible = false;
       break;

@@ -315,6 +315,7 @@ html, body {
         return countries.setCountry();
     }
 </script>
+ @INCLUDE ('footer')
 </body>
 
 @endsection

@@ -32,6 +32,7 @@
                        <a class="navbar-brand" href="/">Yachting</a>
                       <a class="navbar-brand" href="/yachts">Яхты</a>
                       <a class="navbar-brand" href="/countries">Страны</a>
+                    <a class="navbar-brand" href="/routes">Маршруты</a>
                 </div>
 
                 <div class="collapse navbar-collapse" id="app-navbar-collapse">

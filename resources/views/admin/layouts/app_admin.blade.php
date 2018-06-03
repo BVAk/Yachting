@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
+<title>Yachting-Dashboard</title>
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
@@ -16,7 +16,7 @@
     
 </head>
 <body>
-    <div id="app">
+<div id="app">
         <nav class="navbar navbar-default navbar-static-top">
             <div class="container">
                 <div class="navbar-header">
@@ -43,7 +43,8 @@
                            <ul class="dropdown-menu" role="menu">
 
                            <li><a href ="/admin/podtverZakaz">Подтвердить заказы</a></li>
-                            <li><a href ="/admin/Zakazi">Промотр заказов</a></li></ul>
+                            <li><a href ="/admin/Zakazi">Проcмотр заказов</a></li>
+                        <li><a href ="/admin/Delete">Отмененные заказы</a></li></ul>
                        </li>
                     </ul>
 
