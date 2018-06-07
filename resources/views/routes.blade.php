@@ -19,7 +19,7 @@
             <div class="panel panel-default">
                 <div class="links" align="center">
                     @foreach ($routes as $oneroute)
-                        <a href="/routes/{{$oneroute->Countries_id}}" style="padding:20px">{{$oneroute->Countries_name}} </a>
+                        <a href="/routes/countries/{{$oneroute->Countries_id}}" style="padding:20px">{{$oneroute->Countries_name}} </a>
 @break
 
                     @endforeach

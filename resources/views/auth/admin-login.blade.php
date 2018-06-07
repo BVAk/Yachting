@@ -2,7 +2,7 @@
 
 @section('content')
 <head>
-    <title>Yachting</title>
+    <title>Yachting-Dashboard</title>
 </head>
 <div class="container">
     <div class="row">
@@ -58,9 +58,7 @@
                                     Login
                                 </button>
 
-                                <a class="btn btn-link" href="{{ route('password.request') }}">
-                                    Forgot Your Password?
-                                </a>
+
                             </div>
                         </div>
                     </form>

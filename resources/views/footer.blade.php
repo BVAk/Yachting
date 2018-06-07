@@ -10,7 +10,7 @@
 <body></body>
 <footer style="vertical-align: text-bottom">
     <br>
-        <div class="panel panel-footer" align="center">
+        <div class="panel-footer" align="center">
             В случае вопросов и уточнений, обращаться по телефону:<br>+38 (050) 862 88 78 / +38 (067) 344 06 81<br>или
             по почте:<br>
             yachting_od@gmail.com

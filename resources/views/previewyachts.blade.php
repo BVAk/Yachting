@@ -1,6 +1,6 @@
 <html>  @include('header')
 <?
-$yacht = DB::table('yachts')->join('marinas', 'Yacht_marina', '=', 'marinas.marinas_id')->join('countries', 'marinas.Countries_Countries_id', '=', 'countries.countries_id')->join('Yachts_photo', 'Yachts.Yachts_id', '=', 'Yachts_photo.Yachts_id')->where('Yachts.Yachts_id', $yachts_id)->paginate(15);
+$yacht = DB::table('yachts')->join('marinas', 'Yacht_marina', '=', 'marinas.marinas_id')->join('countries', 'marinas.Countries_Countries_id', '=', 'countries.countries_id')->join('Yachts_photo', 'Yachts.Yachts_id', '=', 'Yachts_photo.Yachts_id')->where('Yachts.Yachts_id', $yachts_id)->get();
 ?>
 <title>Yachting</title>
 <!-- Bootstrap CSS -->
@@ -120,7 +120,7 @@ $yacht = DB::table('yachts')->join('marinas', 'Yacht_marina', '=', 'marinas.mari
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td><img src="{{asset($oneyacht->Yacht_structure)}}"></td>
+                                            <td><img width="700px" src="{{asset($oneyacht->Yacht_structure)}}"></td>
 
 
                                         </tr>

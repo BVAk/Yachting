@@ -1,6 +1,10 @@
 @include('header')
-<?$all=DB::table('yachts')->join('marinas','Yacht_marina','=','marinas.marinas_id')->join('countries','Countries.Countries_id','=','marinas.countries_countries_id')->where('Yachts.Yachts_id', $yachts_id)->paginate(15);
-  $Booking_date =new \DateTime('now'); ?>
+<?
+use Carbon\Carbon;
+use Carbon\CarbonInterval;
+$date = Carbon::now();
+$all=DB::table('yachts')->join('marinas','Yacht_marina','=','marinas.marinas_id')->join('countries','Countries.Countries_id','=','marinas.countries_countries_id')->where('Yachts.Yachts_id', $yachts_id)->paginate(15);
+  ?>
 <title>Yachting</title>
 <style>
 .btton {
@@ -58,9 +62,9 @@
 
               <form action="/book" method="post">
                 {{csrf_field()}}
-                <div id="dka">
+               
                   @foreach($all as $marina)                <label for="date">Дата отправления</label>
-                  <input type="date" min="2018-05-30" class="form-control" id="date" name="Booking_date_otpr" placeholder="Укажите дату" onchange="     
+                  <input type="date" min={{$date}} class="form-control" id="date" name="Booking_date_otpr" placeholder="Укажите дату" onchange="
                   var dateElement = document.getElementById('date').value;
                   var dateStart = new Date(dateElement); 
 
@@ -72,17 +76,21 @@
 
                   <label for="date">Дата прибытия</label>                            
                   <input type="text" class="form-control" id="date-end" name="Booking_date_prib" disabled>     
-
+ <div id="dka">
                   <fieldset  onchange="input()" id="select" class="selectpicker">
-                    <label>Нужен ли Вам шкипер?</label>
+                    <label>Нужен ли Вам шкипер?</label><br>
 
-                    <input type="radio" id="skipper" @change="setCost(1)" name="interest" value="withskipper">
-                    <label for="withskipper">Да</label>
-                    <input type="radio" id="skipper" @change="setCost(0)" name="interest" value="noskipper">
-                    <label for="noskipper">Нет</label> <br>
+<select id="skipper" name="skipper" class="selectpicker" style="font-size: 20px;"
+                                    required>
+                                <option value="нет" @click="setCost(0)"> нет</option>
+                                <option value="да" @click="setCost(1)"> да</option>
+                                </select><br>
+
+                  
                     <label for="text">Стоимость заказа</label> <br>
-                   @{{cost}}
-
+                   @{{cost}} евро/неделя
+                  
+  
                   </fieldset>
                  
 
@@ -105,7 +113,7 @@
       </div>
     </div>
   </div>
-
+<br><br><br>
   @INCLUDE ('footer')
 </body>
 

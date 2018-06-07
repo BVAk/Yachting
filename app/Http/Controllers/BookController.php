@@ -60,6 +60,7 @@ class BookController extends Controller
      $Booking_date_prib->modify('+ 7 days');
      $Booking_status = $request->input('Booking_status');
      $cost=$request->input('cost');
+     $skipper=$request->get('skipper');
      $is_avaible = true;
      for($i = 0; $i < 7; $i ++){
       $currentDate = new \DateTime($request->input('Booking_date_otpr'));
@@ -77,7 +78,7 @@ class BookController extends Controller
 
 
   if($is_avaible){
-    $data = array('Users_id'=>$Users_id,'Yachts_Yachts_id'=>$Yachts_Yachts_id, 'Booking_date'=>$Booking_date, 'Booking_date_otpr'=>$Booking_date_otpr,'Booking_date_prib'=>$Booking_date_prib,'Booking_status'=>$Booking_status,'Booking_cost'=>$cost);
+    $data = array('Skipper'=>$skipper,'Users_id'=>$Users_id,'Yachts_Yachts_id'=>$Yachts_Yachts_id, 'Booking_date'=>$Booking_date, 'Booking_date_otpr'=>$Booking_date_otpr,'Booking_date_prib'=>$Booking_date_prib,'Booking_status'=>$Booking_status,'Booking_cost'=>$cost);
     DB::table('Booking')->insert($data);
   }
   else return redirect()->back()->with('status', 'Выбранные даты уже заняты');

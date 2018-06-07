@@ -45,7 +45,6 @@ class HomeController extends Controller
 
     public function edit(Booking $booking, $status)
     {
-
         $booking->update(['Booking_status' => $status]);
         $bookings=DB::table('booking')->where('Booking_status','=','отменено')->where('Booking_money_oplacheno','=',"0")->delete();
         return redirect('/home');

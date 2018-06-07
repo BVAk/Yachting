@@ -50,7 +50,7 @@ $status="оплачено";
     if ($file) {
         $filename = $file->getClientOriginalName();
 
-        $a = '<a href="../'.$filename.'" target="_blank">Тут</a>';
+        $a = '<a href="../'.$filename.'" target="_blank">Квитанция</a>';
 
         Storage::disk('local')->put($filename, File::get($file));
     }

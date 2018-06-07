@@ -30,8 +30,8 @@
                     <!-- Branding Image -->
                    
                        <a class="navbar-brand" href="/">Yachting</a>
-                      <a class="navbar-brand" href="/yachts">Яхты</a>
                       <a class="navbar-brand" href="/countries">Страны</a>
+                    <a class="navbar-brand" href="/yachts">Яхты</a>
                     <a class="navbar-brand" href="/routes">Маршруты</a>
                 </div>
 
@@ -42,7 +42,7 @@
                     </ul>
 
                     <!-- Right Side Of Navbar -->
-                    <ul class="nav navbar-nav navbar-right">
+                    <ul class="nav navbar-nav navbar-right" style="font-size: 17px">
                         <!-- Authentication Links -->
 
                         @guest

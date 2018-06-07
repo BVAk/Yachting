@@ -92,7 +92,7 @@
                                     <td>Страна: {{$oneall->Countries_name}} <br>Марина: {{$oneall->Marinas_name}}
                                     </td>
                                     <td>Статус заказа: {{$oneall->Booking_status}}<br>
-                                        Стоимость: {{$oneall->Booking_cost}} €
+                                        Стоимость: <br>{{$oneall->Booking_cost}} €
                                     </td>
                                     <td>
                         </div>
@@ -100,19 +100,22 @@
                         <a href="/yachts/{{$oneall->Yachts_id}}">
                             <button align="center" class="btton-click">Подробнее</button>
                         </a><br>
+                        {!!$oneall->Podtver!!}
 
                         <div id="oplata">
                             <p :onload="oplatit()"></p>
 
                         </div>
-                        <button onclick="printContent('1')">Print</button>
+
 
                         <a href="/{{$oneall->Booking_id}}/oplata/">
                             <button align="center" class="btton">Оплатить</button>
                         </a><br><br>
-                        <a href="{{'/downloadPDF/'.$oneall->Booking_id}}">PDF</a>
-                        <button class=" btton-danger" onclick="delet('block')">Отменить</button>
+
+                        <button class=" btton-danger" name="booking_id" onclick="delet('block')" value="{{$oneall->Booking_id}}">Отменить</button>
+
                         <div id="wrap">></div>
+
                         <div id="window">
 
                             <!-- Картинка крестика-->
@@ -125,9 +128,10 @@
                                 Вы уверены, что хотите удалить заказ?<br><br><br>
 
                                 <a href="/home" class="myButton">&nbsp&nbsp&nbsp Нет &nbsp&nbsp&nbsp </a>
-                                <a style="padding-left: 40% class=" myButton"
-                                href="{{url('/'.$oneall->Booking_id.'/edit/отменено')}}"> &nbsp&nbsp&nbsp Да
+                                <a style="padding-left: 40%" class="myButton"
+                                href="/{{$oneall->Booking_id}}/edit/отменено"> &nbsp&nbsp&nbsp Да
                                 &nbsp&nbsp&nbsp</a>
+
                             </center>
 
                         </div>

@@ -54,8 +54,11 @@
               </table>
             </div>
           
-          
         </div>
+
+          <div style="margin-left: 40%">
+                            {!!$all->links()!!}
+                        </div>
       </div>
     </div>
   </div>

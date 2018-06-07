@@ -124,7 +124,7 @@
             <form action="/url" role="form" method="POST" enctype="multipart/form-data">
               {{csrf_field()}}
               @foreach ($all as $oneall) <div align="center">
-                Для подтверждении брони, просим оплатить пол стоимости Вашего заказа: <h3>{{($oneall->Booking_cost)/2}} €</h3> 
+                Для подтверждении брони, просим оплатить половину стоимости Вашего заказа: <h3>{{($oneall->Booking_cost)/2}} €</h3>
                 <h5>Реквизиты:</h5> карточка ПриватБанка: <br> <h3> #4731217104018815</h3><br>
                 Получатель Карпин Владимир Йосипович. <br>
 

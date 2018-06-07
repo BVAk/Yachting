@@ -12,8 +12,25 @@ Route::prefix('/admin')->group(function () {
     Route::get('/podtverZakaz', 'AdminController@podtverZakaz');
     Route::get('/Zakazi','AdminController@zakazi' );
     Route::get('/Delete', 'AdminController@deleteZakaz');
+    Route::get('/Zakazi/{Countries_id}', function($Countries_id){
+        return view ('admin.categories.Countries')->with('Countries_id',$Countries_id);});
+    Route::get('/Zakazi/{Countries_id}/{Marinas_id}', function($Countries_id,$Marinas_id){
+        return view ('admin.categories.Marinas')->with('Countries_id',$Countries_id)->with('Marinas_id',$Marinas_id);});
+    Route::get('/Zakazi/{Countries_id}/yachts/{Yachts_id}', function($Countries_id,$Yachts_id){
+        return view ('admin.categories.Yachts')->with('Countries_id',$Countries_id)->with('Yachts_id',$Yachts_id);});
+    Route::get('/Zakaziz/{{Countries_id}}','AdminController@countries');
+    Route::get('/addYacht','AdminController@addYacht');
+    Route::post('/insertnewyacht','AdminController@insertnewyacht');
+    
+    Route::get('/editYacht','AdminController@editYacht');
+    Route::get('/yachts/{Yachts_id}', function($Yachts_id){
+        return view('admin.categories.editProfileYacht')->with('Yachts_id',$Yachts_id); });
+    Route::post('/edityacht','AdminController@editprofile');
 
+    Route::get('/yachts/delete/{Yachts_id}','AdminController@deleteYacht');
 });
+
+
 Route::get('/test', function () {
     return view('test');
 });

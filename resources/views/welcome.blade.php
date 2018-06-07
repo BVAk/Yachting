@@ -187,7 +187,7 @@ html, body {
 
             <div class="content">
                 <div class="title m-b-md ">
-                    Yachting
+<img  src="{{asset('/image/icon.png')}}">                    Yachting
                 </div>
 
                 <div class="links">
@@ -210,22 +210,7 @@ html, body {
             <div class="panel panel-default">
 
 
-                <form role="form" class="form-inline" style="margin: 10px; padding: 10px; text-align: center; ">
-                   <div class="form-group">
-                    <label for="directive">Направление</label>
-                    <select  name="country" id="country-select" onchange="setCountry()" class="selectpicker" >
-                      @foreach ($countries as $key => $data)
-                      <option value="{{$data->Countries_id}}">{{$data->Countries_name}}</option>
-                      @endforeach
-
-                  </select>
-              </div>
-              <div class="form-group " style="margin-left: 50px;">
-                <label for="date">Дата</label>
-                <input type="date" onchange=" setCountry()" class="selectpicker" id="date" placeholder="Укажите дату" >
-            </div>
-            <a id="country-link" onclick="setCountry()" class="btn btn-success" style="margin-left: 50px;">Поиск яхт</a>
-        </form>
+              
 
     </div>
 </div>
@@ -304,11 +289,8 @@ html, body {
             setCountry(){
             this.currentCountry = document.getElementById('country-select').value;
             this.Date = document.getElementById('date').valueAsDate = new Date();
-            document.getElementById('country-link').href =  "/" + this.currentCountry+"/"+this.Date;
-        }
-           setDate(){
-            
-        }
+            document.getElementById('country-link').href =  "countries/" + this.currentCountry+"";
+        },
     }})
 
     function setCountry(){

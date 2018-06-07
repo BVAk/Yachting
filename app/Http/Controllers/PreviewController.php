@@ -40,14 +40,14 @@ class BookController extends Controller
      */
 
 
-    public function store(Yacht $yacht, $Count_view)
+    public function store(Yacht $yacht, Request $request, $Count_view)
     {
 
         $Count_view = $request->input('countView');
         $yachts_id = $request->input('id');
 
         $yacht->update(['Count_view' => $Count_view]);
-        return redirect('/yachts/' .{{$yachts_id} . '');
+        return redirect('/yachts/{{$yachts_id}');
 
  }
     /**
@@ -69,7 +69,7 @@ class BookController extends Controller
      */
     public function edit(Yacht $yacht)
     {
-        //
+
     }
 
     /**
@@ -81,28 +81,10 @@ class BookController extends Controller
      */
     public function update(Request $request, $yachts_id)
     {
-        //public function store(Request $request,$yachts_id)
 
-
-        $Count_view = $request->input('countView');
-        $yachts_id = $request->input('yachts_id');
-
-        DB::update('update Yachts set Count_view = ? where Yachts_id = ?', [$Count_view, $yachts_id]);
-
-        return view('previewyachts');
 
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Yacht $yacht
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Yacht $yacht)
-    {
-        //
-    }
 
 
 }

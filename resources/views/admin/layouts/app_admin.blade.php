@@ -39,17 +39,27 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="nav navbar-nav">
                        <li class="dropdown">
-                           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expaanded="false">Заказы</a>
+                           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" style="font-size: 18px" aria-expaanded="false">Заказы</a>
                            <ul class="dropdown-menu" role="menu">
 
-                           <li><a href ="/admin/podtverZakaz">Подтвердить заказы</a></li>
-                            <li><a href ="/admin/Zakazi">Проcмотр заказов</a></li>
-                        <li><a href ="/admin/Delete">Отмененные заказы</a></li></ul>
+                           <li><a class="navbar-brand" href ="/admin/podtverZakaz">Подтвердить заказы</a></li>
+                            <li><a class="navbar-brand" href ="/admin/Zakazi">Проcмотр заказов</a></li>
+                        <li><a class="navbar-brand" href ="/admin/Delete">Отмененные заказы</a></li></ul>
                        </li>
+                    </ul>
+                    <ul class="nav navbar-nav">
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" style="font-size: 18px" aria-expaanded="false">Яхты</a>
+                            <ul class="dropdown-menu" role="menu">
+
+                                <li><a class="navbar-brand" href ="/admin/editYacht">Изменить</a></li>
+                                
+                                <li><a class="navbar-brand" href ="/admin/addYacht">Добавить</a></li></ul>
+                        </li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->
-                    <ul class="nav navbar-nav navbar-right">
+                    <ul class="nav navbar-nav navbar-right" style="font-size: 18px">
                         <!-- Authentication Links -->
                         @guest
                             <li><a href="{{ route('login') }}">Login</a></li>

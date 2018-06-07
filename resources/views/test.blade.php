@@ -1,4 +1,6 @@
 <??>
+<button onclick="printContent('1')">Print</button>
+<a href="{{'/downloadPDF/'.$oneall->Booking_id}}">PDF</a>
 
 <script type="text/javascript">
     function printContent(el) {

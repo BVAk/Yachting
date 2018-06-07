@@ -55,11 +55,12 @@ $route = DB::table('Routes')->join('Countries', 'Routes.Countries_id', '=', 'Cou
                                         @BREAK @endforeach</thead>
 
                                 <br>
+                                <br>
                                 @foreach ($route as $oneyacht)
                                     <div align="center">
                                     <a href="/countries/{{$oneyacht->Countries_id}}">
 
-                                        <button padding="100px" class="btton">Просмотреть яхты в этой стране</button>
+                                        <button padding="100px" class="btton-look">Просмотреть яхты в этой стране</button>
                                     </a>
 
                                     @break

@@ -15,92 +15,34 @@ $bookings= DB::table('booking')->where('booking.booking_status','=','оплач�
 
 @section('content')
 
-    <div class="container">
-        <div class="row" id="select">
-             <select  name="country" id="yacht-select" onchange="setYacht()" class="selectpicker" >
-                      @foreach ($yachtName as $key => $data)
-                      <option value="{{$data->Yacht_name}}">{{$data->Yacht_name}}</option>
-                      
-                      @endforeach
+<div class="container">
+    <div class="row" id="select">
+        
+            <div class="content">
+                <div align="center"> <h1><img  src="{{asset('/image/icon.png')}}"> Добро пожаловать, администратор!</h1> 
+         
+         <br><br>
 
-                  </select>
-              
-
-            <div class="col-sm-3">
-                <div class="jumbotron text-center">
-                    <p><span class="label label-primary">Яхт {{$yachts}}</span></p>
-                </div>
-            </div>
-            <div class="col-sm-3">
-                <div class="jumbotron text-center">
-                    <p><span class="label label-primary">Пользователей {{$users}}</span></p>
-                </div>
-            </div>
-            <div class="col-sm-3">
-                <div class="jumbotron text-center">
-                    <p><span class="label label-primary">Сегодня  @foreach ($bookingnow as $booking_count) {{$booking_count->booking_count}} @endforeach </span></p>
-                </div>
+         <div class="col-sm-4">
+            <div class="jumbotron text-center">
+                <p><span class="label label-primary">Яхт {{$yachts}}</span></p>
             </div>
         </div>
-
-       
-        <div id="inform"></div>
-        
-
-        
-
-        @foreach($booking as $booking)
-            Заказов в этот день:  {{$booking->booking_date}} - {{$booking->booking_count}} <br>
-        @endforeach
+        <div class="col-sm-4">
+            <div class="jumbotron text-center">
+                <p><span class="label label-primary">Пользователей {{$users}}</span></p>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="jumbotron text-center">
+                <p><span class="label label-primary">Сегодня заказов @foreach ($bookingnow as $booking_count) {{$booking_count->booking_count}} @endforeach </span></p>
+            </div>
+        </div>
+ </div></div>
     </div>
 
 
-@endsection
-@section('scripts')
-    <script>
+</div>
 
-        Vue.http.headers.common['X-CSRF-TOKEN'] = document.querySelector('#token').getAttribute('content');
 
-        new Vue({
-            el: '#inform',
-            data: {
-                inf: []
-            },
-            mounted: function () {
-                this.fetchInf();
-            },
-
-            methods: {
-                fetchInf: function () {
-                    this.$http.get('http://jsonplaceholder.typicode.com/posts').then(function (response) {
-                        this.inf = response.body;
-                        console.log(this.inf);
-                    })
-                }
-            }
-        });
-
-    </script>
-    <script type="text/javascript">
-  function setYacht() {
-     var app = new Vue({
-    el: '#select',
-    data: {
-
-      yacht: 
-       document.getElementById('yacht-select').value;
-    
-
-    },
-    methods: {
-
-     setYacht(){
-       
-       
-console.log(this.yacht);
-    }
-
-  }})
-  }
-</script>
 @endsection
